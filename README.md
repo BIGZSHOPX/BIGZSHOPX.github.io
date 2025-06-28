@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -15,13 +15,14 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #000;
+      background: url('logo.jpeg') no-repeat center center fixed;
+      background-size: cover;
       color: #fff;
       line-height: 1.6;
     }
 
     header {
-      background-color: #000;
+      background-color: rgba(0, 0, 0, 0.85);
       color: white;
       padding: 1rem 0;
       position: sticky;
@@ -55,14 +56,20 @@
       font-weight: 600;
     }
 
+    nav a:hover {
+      color: #ddd;
+    }
+
     .section {
       padding: 80px 20px;
       max-width: 1100px;
       margin: auto;
+      background-color: rgba(0, 0, 0, 0.85);
+      border-radius: 12px;
     }
 
     .hero {
-      background: linear-gradient(120deg, #111, #222);
+      background: rgba(0, 0, 0, 0.7);
       color: white;
       text-align: center;
       padding: 100px 20px;
