@@ -465,7 +465,7 @@
         <div class="outfit-info">
           <h4>Everyday Elegance</h4>
           <p>Comfortable meets stylish</p>
-          <div class="price">$79.99</div>
+          <div class="price">$99.99</div>
         </div>
       </div>
       
@@ -502,7 +502,6 @@
   <footer>
     <p>&copy; 2025 BIGZSHOPX. All rights reserved.</p>
     <p>Contact: stephanmarlyp@gmail.com</p>
-    <p>🌟 Hosted on GitHub Pages</p>
   </footer>
 </body>
 </html>
