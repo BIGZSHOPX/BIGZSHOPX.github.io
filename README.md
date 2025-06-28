@@ -11,7 +11,7 @@
     <h1>Welcome to My Website BIGZSHOP</h1>
     <nav>
       <ul>
-        <li><a href="#about">About Me</a></li>
+        <li><a href="#about">About Us</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -20,7 +20,7 @@
 
   <section id="about">
     <h2>About Me</h2>
-    <p>Hello! I'm [Your Name], and this is my personal website. I love building things with code.</p>
+    <p>Hello! We are BIGZSHOP, and this is our website.</p>
   </section>
 
   <section id="projects">
@@ -33,11 +33,11 @@
 
   <section id="contact">
     <h2>Contact</h2>
-    <p>You can reach me at <a href="mailto:you@example.com">you@example.com</a>.</p>
+    <p>You can reach me at <a href="mailto:you@example.com">stephanmarlyp@gmail.com</a>.</p>
   </section>
 
   <footer>
-    <p>&copy; 2025 Your Name</p>
+    <p>&copy; 2025 BIGZSHOP</p>
   </footer>
 
   <script src="script.js"></script>
