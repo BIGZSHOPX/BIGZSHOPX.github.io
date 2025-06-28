@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -21,13 +21,13 @@
     }
 
     header {
-      background-color: #111;
+      background-color: #000;
       color: white;
       padding: 1rem 0;
       position: sticky;
       top: 0;
       z-index: 999;
-      box-shadow: 0 2px 4px rgba(255,255,255,0.1);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
     nav {
@@ -39,8 +39,8 @@
       padding: 0 1rem;
     }
 
-    nav h1 {
-      font-size: 1.5rem;
+    nav img {
+      height: 50px;
     }
 
     nav ul {
@@ -62,7 +62,7 @@
     }
 
     .hero {
-      background: linear-gradient(120deg, #111, #333);
+      background: linear-gradient(120deg, #111, #222);
       color: white;
       text-align: center;
       padding: 100px 20px;
@@ -92,7 +92,7 @@
     }
 
     .btn:hover {
-      background: #ccc;
+      background: #e2e6ea;
     }
 
     .grid {
@@ -103,7 +103,6 @@
 
     .card {
       background: #111;
-      color: white;
       padding: 2rem;
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(255,255,255,0.05);
@@ -124,9 +123,9 @@
     input, textarea {
       padding: 0.75rem;
       font-size: 1rem;
-      background-color: #222;
-      color: white;
       border: 1px solid #444;
+      background-color: #000;
+      color: #fff;
       border-radius: 8px;
     }
 
@@ -152,7 +151,7 @@
 <body>
   <header>
     <nav>
-      <h1>BIGZSHOPX</h1>
+      <img src="/mnt/data/B35317F6-5E3C-44F0-A9DF-602184302471.jpeg" alt="BIGZSHOPX Logo">
       <ul>
         <li><a href="#home">Home</a></li>
         <li><a href="#services">Outfits</a></li>
