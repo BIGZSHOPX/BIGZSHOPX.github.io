@@ -1,4 +1,3 @@
-
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -17,6 +16,8 @@
       font-family: 'Inter', sans-serif;
       background: url('logo.jpeg') no-repeat center center fixed;
       background-size: cover;
+      background-color: rgba(0, 0, 0, 0.5);
+      background-blend-mode: darken;
       color: #fff;
       line-height: 1.6;
     }
@@ -41,7 +42,7 @@
     }
 
     nav img {
-      height: 50px;
+      height: 35px;
     }
 
     nav ul {
