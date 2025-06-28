@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Modern Business</title>
+  <title>BIGZSHOPX - Custom & Premade Outfits</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     * {
@@ -15,19 +15,19 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #f8f9fa;
-      color: #212529;
+      background-color: #000;
+      color: #fff;
       line-height: 1.6;
     }
 
     header {
-      background-color: #0d6efd;
+      background-color: #111;
       color: white;
       padding: 1rem 0;
       position: sticky;
       top: 0;
       z-index: 999;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 4px rgba(255,255,255,0.1);
     }
 
     nav {
@@ -62,7 +62,7 @@
     }
 
     .hero {
-      background: linear-gradient(120deg, #0d6efd, #6610f2);
+      background: linear-gradient(120deg, #111, #333);
       color: white;
       text-align: center;
       padding: 100px 20px;
@@ -83,7 +83,7 @@
       display: inline-block;
       margin-top: 20px;
       background: white;
-      color: #0d6efd;
+      color: black;
       padding: 12px 24px;
       border-radius: 8px;
       text-decoration: none;
@@ -92,7 +92,7 @@
     }
 
     .btn:hover {
-      background: #e2e6ea;
+      background: #ccc;
     }
 
     .grid {
@@ -102,10 +102,11 @@
     }
 
     .card {
-      background: white;
+      background: #111;
+      color: white;
       padding: 2rem;
       border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 10px rgba(255,255,255,0.05);
       transition: transform 0.2s;
     }
 
@@ -123,13 +124,15 @@
     input, textarea {
       padding: 0.75rem;
       font-size: 1rem;
-      border: 1px solid #ccc;
+      background-color: #222;
+      color: white;
+      border: 1px solid #444;
       border-radius: 8px;
     }
 
     button {
-      background-color: #0d6efd;
-      color: white;
+      background-color: white;
+      color: black;
       padding: 0.75rem;
       border: none;
       border-radius: 8px;
@@ -138,7 +141,7 @@
     }
 
     footer {
-      background: #212529;
+      background: #111;
       color: #fff;
       text-align: center;
       padding: 2rem 1rem;
@@ -149,10 +152,10 @@
 <body>
   <header>
     <nav>
-      <h1>ModernBiz</h1>
+      <h1>BIGZSHOPX</h1>
       <ul>
         <li><a href="#home">Home</a></li>
-        <li><a href="#services">Services</a></li>
+        <li><a href="#services">Outfits</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -160,37 +163,37 @@
   </header>
 
   <section id="home" class="hero">
-    <h2>Grow Your Business with Modern Solutions</h2>
-    <p>We offer smart strategies and digital tools that drive success and make your business future-ready.</p>
-    <a href="#contact" class="btn">Get Started</a>
+    <h2>Style That Fits You</h2>
+    <p>BIGZSHOPX offers trendy premade outfits and fully customizable clothing that makes you stand out.</p>
+    <a href="#contact" class="btn">Order Now</a>
   </section>
 
   <section id="services" class="section">
-    <h2>Our Services</h2>
+    <h2>Our Outfits</h2>
     <div class="grid">
       <div class="card">
-        <h3>Business Consulting</h3>
-        <p>Professional guidance to navigate your market and optimize operations.</p>
+        <h3>Premade Outfits</h3>
+        <p>Handpicked stylish fits, ready to wear and ship immediately.</p>
       </div>
       <div class="card">
-        <h3>Digital Marketing</h3>
-        <p>Social media, email, SEO and more to boost your brand visibility and engagement.</p>
+        <h3>Custom Designs</h3>
+        <p>Create your dream outfit with our design team. You choose, we make it happen.</p>
       </div>
       <div class="card">
-        <h3>Web & App Development</h3>
-        <p>Custom, responsive websites and apps tailored to your business goals.</p>
+        <h3>Group Orders</h3>
+        <p>Perfect for teams, events, and crews. Bulk options available with personalized touches.</p>
       </div>
     </div>
   </section>
 
   <section id="about" class="section">
-    <h2>About Us</h2>
-    <p>ModernBiz is a forward-thinking agency founded in 2025. We partner with clients to deliver cutting-edge strategies that drive measurable growth. Our mission is to make business smarter, faster, and more customer-focused.</p>
+    <h2>About BIGZSHOPX</h2>
+    <p>Founded in 2025, BIGZSHOPX was built to bring creativity and identity to fashion. Whether you're after convenience or a fully custom look, we're here to deliver high-quality style at an affordable price.</p>
   </section>
 
   <section id="contact" class="section">
     <h2>Contact Us</h2>
-    <p>Let’s build something amazing together. Reach out via email or the form below.</p>
+    <p>Have questions or ready to order? Reach out directly at <strong>bigzshopx@gmail.com</strong> or use the form below.</p>
     <form>
       <input type="text" placeholder="Your Name" required />
       <input type="email" placeholder="Your Email" required />
@@ -200,7 +203,7 @@
   </section>
 
   <footer>
-    <p>&copy; 2025 ModernBiz. All rights reserved.</p>
+    <p>&copy; 2025 BIGZSHOPX. All rights reserved.</p>
   </footer>
 </body>
 </html>
