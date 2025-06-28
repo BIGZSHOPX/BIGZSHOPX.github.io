@@ -505,3 +505,107 @@
   </footer>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIGZSHOPX - Fashion Store</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="BIGZSHOPX Logo" class="logo-icon">
+                BIGZSHOPX
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#custom">Custom Orders</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="admin.html">Admin</a></li> <!-- Link to admin panel -->
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Your existing sections -->
+        <section id="home">...</section>
+        <section id="products">...</section>
+    </main>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIGZSHOPX - Admin Panel</title>
+    <link rel="stylesheet" href="styles/admin.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="admin.html" class="logo">
+                <img src="images/logo.png" alt="BIGZSHOPX Logo" class="logo-icon">
+                BIGZSHOPX ADMIN
+            </a>
+            <ul class="nav-links">
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#products">Manage Products</a></li>
+                <li><a href="#add-product">Add New</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="dashboard">...</section>
+        <section id="products">...</section>
+        <section id="add-product">...</section>
+    </main>
+
+    <script src="scripts/admin.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIGZSHOPX - Admin Panel</title>
+    <link rel="stylesheet" href="styles/admin.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="admin.html" class="logo">
+                <img src="images/logo.png" alt="BIGZSHOPX Logo" class="logo-icon">
+                BIGZSHOPX ADMIN
+            </a>
+            <ul class="nav-links">
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#products">Manage Products</a></li>
+                <li><a href="#add-product">Add New</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Paste the entire admin panel HTML I provided earlier -->
+        <section id="dashboard">...</section>
+        <section id="products">...</section>
+        <section id="add-product">...</section>
+    </main>
+
+    <script src="scripts/admin.js"></script>
+</body>
+</html>
+// scripts/admin.js
+const ADMIN_PASSWORD = "yourSecret123"; // Change this!
+
+const enteredPassword = prompt("Enter Admin Password:");
+if (enteredPassword !== ADMIN_PASSWORD) {
+    window.location.href = "index.html"; // Redirect if wrong
+}
