@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -14,22 +15,21 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: url('logo.jpeg') no-repeat center center fixed;
-      background-size: cover;
-      background-color: rgba(0, 0, 0, 0.5);
-      background-blend-mode: darken;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: #fff;
       line-height: 1.6;
+      min-height: 100vh;
     }
 
     header {
-      background-color: rgba(0, 0, 0, 0.85);
+      background-color: rgba(0, 0, 0, 0.9);
       color: white;
       padding: 1rem 0;
       position: sticky;
       top: 0;
       z-index: 999;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
     }
 
     nav {
@@ -41,128 +41,296 @@
       padding: 0 1rem;
     }
 
-    nav img {
-      height: 35px;
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #fff;
+      text-decoration: none;
     }
 
     nav ul {
       list-style: none;
       display: flex;
-      gap: 1rem;
+      gap: 2rem;
     }
 
     nav a {
       color: white;
       text-decoration: none;
       font-weight: 600;
+      transition: color 0.3s, transform 0.3s;
     }
 
     nav a:hover {
-      color: #ddd;
+      color: #667eea;
+      transform: translateY(-2px);
     }
 
     .section {
       padding: 80px 20px;
-      max-width: 1100px;
+      max-width: 1200px;
       margin: auto;
-      background-color: rgba(0, 0, 0, 0.85);
-      border-radius: 12px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .hero {
-      background: rgba(0, 0, 0, 0.7);
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(102, 126, 234, 0.3));
       color: white;
       text-align: center;
-      padding: 100px 20px;
+      padding: 120px 20px;
+      border-radius: 20px;
+      margin: 2rem auto;
+      max-width: 1200px;
     }
 
     .hero h2 {
-      font-size: 3rem;
+      font-size: 4rem;
       margin-bottom: 1rem;
+      font-weight: 800;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      animation: fadeInUp 1s ease-out;
     }
 
     .hero p {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       max-width: 600px;
       margin: auto;
+      opacity: 0.9;
+      animation: fadeInUp 1s ease-out 0.3s both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .btn {
       display: inline-block;
-      margin-top: 20px;
-      background: white;
-      color: black;
-      padding: 12px 24px;
-      border-radius: 8px;
+      margin-top: 30px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 15px 30px;
+      border-radius: 50px;
       text-decoration: none;
       font-weight: bold;
-      transition: background 0.3s;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      animation: fadeInUp 1s ease-out 0.6s both;
     }
 
     .btn:hover {
-      background: #e2e6ea;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
     }
 
     .grid {
       display: grid;
       gap: 2rem;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
 
     .card {
-      background: #111;
+      background: rgba(255, 255, 255, 0.1);
       padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(255,255,255,0.05);
-      transition: transform 0.2s;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      transition: all 0.3s;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    }
+
+    .outfit-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .outfit-item {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      overflow: hidden;
+      transition: all 0.3s;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .outfit-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .outfit-image {
+      width: 100%;
+      height: 300px;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: 600;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .outfit-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .outfit-image:hover img {
+      transform: scale(1.1);
+    }
+
+    .outfit-image::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="30" r="8" fill="white" opacity="0.3"/><rect x="40" y="40" width="20" height="25" fill="white" opacity="0.3"/><rect x="35" y="65" width="10" height="20" fill="white" opacity="0.3"/><rect x="55" y="65" width="10" height="20" fill="white" opacity="0.3"/></svg>') center/60px no-repeat;
+      z-index: 1;
+    }
+
+    .outfit-image img + .placeholder-text {
+      display: none;
+    }
+
+    .outfit-image .placeholder-text {
+      z-index: 2;
+      position: relative;
+    }
+
+    .outfit-info {
+      padding: 1rem;
+    }
+
+    .outfit-info h4 {
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .outfit-info p {
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+
+    .price {
+      color: #667eea;
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-top: 0.5rem;
     }
 
     form {
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      margin-top: 1rem;
+      margin-top: 2rem;
     }
 
     input, textarea {
-      padding: 0.75rem;
+      padding: 1rem;
       font-size: 1rem;
-      border: 1px solid #444;
-      background-color: #000;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background-color: rgba(255, 255, 255, 0.1);
       color: #fff;
-      border-radius: 8px;
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: rgba(255, 255, 255, 0.7);
     }
 
     button {
-      background-color: white;
-      color: black;
-      padding: 0.75rem;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 1rem;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 1rem;
       cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 600;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
     }
 
     footer {
-      background: #111;
+      background: rgba(0, 0, 0, 0.9);
       color: #fff;
       text-align: center;
-      padding: 2rem 1rem;
+      padding: 3rem 1rem;
       margin-top: 4rem;
+    }
+
+    .section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .github-notice {
+      background: rgba(102, 126, 234, 0.2);
+      border: 1px solid rgba(102, 126, 234, 0.5);
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .hero h2 {
+        font-size: 2.5rem;
+      }
+      
+      nav ul {
+        gap: 1rem;
+      }
+      
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      
+      nav {
+        flex-direction: column;
+        gap: 1rem;
+      }
     }
   </style>
 </head>
 <body>
   <header>
     <nav>
-      <img src="logo.jpeg" alt="BIGZSHOPX Logo">
+      <a href="#home" class="logo">BIGZSHOPX</a>
       <ul>
         <li><a href="#home">Home</a></li>
-        <li><a href="#services">Outfits</a></li>
+        <li><a href="#mens">Men's</a></li>
+        <li><a href="#womens">Women's</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -170,47 +338,171 @@
   </header>
 
   <section id="home" class="hero">
-    <h2>Style That Fits You</h2>
-    <p>BIGZSHOPX offers trendy premade outfits and fully customizable clothing that makes you stand out.</p>
+    <h2>BIGZSHOPX</h2>
+    <p>BIGZSHOPX offers trendy premade outfits and fully customizable clothing that makes you stand out from the crowd.</p>
     <a href="#contact" class="btn">Order Now</a>
   </section>
 
-  <section id="services" class="section">
-    <h2>Our Outfits</h2>
+  <div class="github-notice">
+    <p><strong>📸 Ready to add your outfit pictures?</strong> Upload your images to your GitHub repository and update the file names in the code!</p>
+  </div>
+
+  <section id="mens" class="section">
+    <h2>Men's Collection</h2>
     <div class="grid">
       <div class="card">
-        <h3>Premade Outfits</h3>
-        <p>Handpicked stylish fits, ready to wear and ship immediately.</p>
+        <h3>Streetwear</h3>
+        <p>Urban-inspired looks with hoodies, joggers, and fresh sneakers. Perfect for the streets and casual hangouts.</p>
       </div>
       <div class="card">
-        <h3>Custom Designs</h3>
-        <p>Create your dream outfit with our design team. You choose, we make it happen.</p>
+        <h3>Smart Casual</h3>
+        <p>Versatile pieces that work for both work and play. Elevated basics that never go out of style.</p>
       </div>
       <div class="card">
-        <h3>Group Orders</h3>
-        <p>Perfect for teams, events, and crews. Bulk options available with personalized touches.</p>
+        <h3>Athletic</h3>
+        <p>Performance meets style with our activewear collection. Stay comfortable while looking fresh.</p>
+      </div>
+    </div>
+
+    <div class="outfit-gallery">
+      <div class="outfit-item">
+        <div class="outfit-image">
+          <img src="images/mens-outfit-1.jpg" alt="Men's Streetwear Set" onerror="this.style.display='none';">
+          <span class="placeholder-text">Men's Streetwear #1</span>
+        </div>
+        <div class="outfit-info">
+          <h4>Urban Classic</h4>
+          <p>Comfortable hoodie and joggers combo</p>
+          <div class="price">$89.99</div>
+        </div>
+      </div>
+      
+      <div class="outfit-item">
+        <div class="outfit-image">
+          <img src="images/mens-outfit-2.jpg" alt="Men's Casual Fit" onerror="this.style.display='none';">
+          <span class="placeholder-text">Men's Casual #2</span>
+        </div>
+        <div class="outfit-info">
+          <h4>Daily Essentials</h4>
+          <p>Perfect for everyday wear</p>
+          <div class="price">$69.99</div>
+        </div>
+      </div>
+      
+      <div class="outfit-item">
+        <div class="outfit-image">
+          <img src="images/mens-outfit-3.jpg" alt="Men's Premium Set" onerror="this.style.display='none';">
+          <span class="placeholder-text">Men's Premium #3</span>
+        </div>
+        <div class="outfit-info">
+          <h4>Luxury Collection</h4>
+          <p>High-end materials and design</p>
+          <div class="price">$129.99</div>
+        </div>
+      </div>
+      
+      <div class="outfit-item">
+        <div class="outfit-image">
+          <img src="images/mens-outfit-4.jpg" alt="Men's Sport Look" onerror="this.style.display='none';">
+          <span class="placeholder-text">Men's Athletic #4</span>
+        </div>
+        <div class="outfit-info">
+          <h4>Active Wear</h4>
+          <p>Performance meets style</p>
+          <div class="price">$79.99</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="womens" class="section">
+    <h2>Women's Collection</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Trendy Sets</h3>
+        <p>Fashion-forward outfits that keep you ahead of the trends. Perfect for making a statement wherever you go.</p>
+      </div>
+      <div class="card">
+        <h3>Elegant Wear</h3>
+        <p>Sophisticated and classy pieces for special occasions and professional settings that command attention.</p>
+      </div>
+      <div class="card">
+        <h3>Casual Chic</h3>
+        <p>Comfortable yet stylish everyday wear that transitions from day to night effortlessly.</p>
+      </div>
+    </div>
+
+    <div class="outfit-gallery">
+      <div class="outfit-item">
+        <div class="outfit-image">
+          <img src="images/womens-outfit-1.jpg" alt="Women's Trendy Set" onerror="this.style.display='none';">
+          <span class="placeholder-text">Women's Trendy #1</span>
+        </div>
+        <div class="outfit-info">
+          <h4>Fashion Forward</h4>
+          <p>Latest trends in one complete look</p>
+          <div class="price">$95.99</div>
+        </div>
+      </div>
+      
+      <div class="outfit-item">
+        <div class="outfit-image">
+          <img src="images/womens-outfit-2.jpg" alt="Women's Elegant Wear" onerror="this.style.display='none';">
+          <span class="placeholder-text">Women's Elegant #2</span>
+        </div>
+        <div class="outfit-info">
+          <h4>Sophisticated Style</h4>
+          <p>Perfect for professional settings</p>
+          <div class="price">$119.99</div>
+        </div>
+      </div>
+      
+      <div class="outfit-item">
+        <div class="outfit-image">
+          <img src="images/womens-outfit-3.jpg" alt="Women's Casual Chic" onerror="this.style.display='none';">
+          <span class="placeholder-text">Women's Casual #3</span>
+        </div>
+        <div class="outfit-info">
+          <h4>Everyday Elegance</h4>
+          <p>Comfortable meets stylish</p>
+          <div class="price">$79.99</div>
+        </div>
+      </div>
+      
+      <div class="outfit-item">
+        <div class="outfit-image">
+          <img src="images/womens-outfit-4.jpg" alt="Women's Summer Collection" onerror="this.style.display='none';">
+          <span class="placeholder-text">Women's Summer #4</span>
+        </div>
+        <div class="outfit-info">
+          <h4>Summer Collection</h4>
+          <p>Light and breezy for warm days</p>
+          <div class="price">$85.99</div>
+        </div>
       </div>
     </div>
   </section>
 
   <section id="about" class="section">
     <h2>About BIGZSHOPX</h2>
-    <p>Founded in 2025, BIGZSHOPX was built to bring creativity and identity to fashion. Whether you're after convenience or a fully custom look, we're here to deliver high-quality style at an affordable price.</p>
+    <p>Founded in 2025, BIGZSHOPX was built to bring creativity and identity to fashion. Whether you're after convenience with our premade collections or want something uniquely yours with our custom designs, we're here to deliver high-quality style at an affordable price. Our team of experienced designers works closely with customers to create outfits that truly represent their personality and lifestyle.</p>
   </section>
 
   <section id="contact" class="section">
     <h2>Contact Us</h2>
-    <p>Have questions or ready to order? Reach out directly at <strong>bigzshopx@gmail.com</strong> or use the form below.</p>
-    <form>
-      <input type="text" placeholder="Your Name" required />
-      <input type="email" placeholder="Your Email" required />
-      <textarea placeholder="Your Message" rows="5" required></textarea>
+    <p>Have questions or ready to order? Reach out directly at <strong>stephanmarlyp@gmail.com</strong> or use the form below.</p>
+    <form action="mailto:stephanmarlyp@gmail.com" method="post" enctype="text/plain">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" placeholder="Your Message (describe your outfit needs, preferred style, size, etc.)" rows="5" required></textarea>
       <button type="submit">Send Message</button>
     </form>
   </section>
 
   <footer>
     <p>&copy; 2025 BIGZSHOPX. All rights reserved.</p>
+    <p>Contact: stephanmarlyp@gmail.com</p>
+    <p>🌟 Hosted on GitHub Pages</p>
   </footer>
 </body>
 </html>
