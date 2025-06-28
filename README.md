@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -151,7 +151,7 @@
 <body>
   <header>
     <nav>
-      <img src="/mnt/data/B35317F6-5E3C-44F0-A9DF-602184302471.jpeg" alt="BIGZSHOPX Logo">
+      <img src="logo.jpeg" alt="BIGZSHOPX Logo">
       <ul>
         <li><a href="#home">Home</a></li>
         <li><a href="#services">Outfits</a></li>
