@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BIGZSHOPX Admin</title>
+    <style>
+        /* Admin CSS (simplified) */
+        body { font-family: Arial; max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .product-card { border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 5px; }
+        button { background: #000; color: white; border: none; padding: 8px 15px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>BIGZSHOPX Admin</h1>
+    
+    <!-- Password Protection -->
+    <div id="login">
+        <input type="password" id="password" placeholder="Enter admin password">
+        <button onclick="checkPassword()">Login</button>
+    </div>
+
+    <!-- Admin Panel (hidden until login) -->
+    <div id="admin-panel" style="display: none;">
+        <h2>Manage Products</h2>
+        <div id="product-list"></div>
+        
+        <h2>Add New Product</h2>
+        <input type="text" id="new-name" placeholder="Product name">
+        <input type="number" id="new-price" placeholder="Price">
+        <button onclick="addProduct()">Add Product</button>
+    </div>
+
+    <script>
+        // Simple password protection
+        function checkPassword() {
+            if (document.getElementById("password").value === "BIGZ123") {
+                document.getElementById("login").style.display = "none";
+                document.getElementById("admin-panel").style.display = "block";
+                loadProducts();
+            } else {
+                alert("Wrong password!");
+            }
+        }
+
+        // Product management functions
+        let products = JSON.parse(localStorage.getItem('products')) || [];
+        
+        function loadProducts() {
+            let html = '';
+            products.forEach((product, index) => {
+                html += `
+                    <div class="product-card">
+                        <h3>${product.name}</h3>
+                        <p>$${product.price}</p>
+                        <button onclick="deleteProduct(${index})">Delete</button>
+                    </div>
+                `;
+            });
+            document.getElementById("product-list").innerHTML = html;
+        }
+
+        function addProduct() {
+            products.push({
+                name: document.getElementById("new-name").value,
+                price: document.getElementById("new-price").value
+            });
+            localStorage.setItem('products', JSON.stringify(products));
+            loadProducts();
+        }
+
+        function deleteProduct(index) {
+            products.splice(index, 1);
+            localStorage.setItem('products', JSON.stringify(products));
+            loadProducts();
+        }
+    </script>
+</body>
+</html><!-- In your index.html -->
+<a href="admin.html" style="position: fixed; bottom: 20px; right: 20px;">Admin</a>
