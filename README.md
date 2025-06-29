@@ -512,14 +512,14 @@
   /* Floating admin button (only visible to you) */
   .admin-float-btn {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 19px;
+    right: 19px;
     background: #000;
     color: white;
-    padding: 10px;
-    border-radius: 50%;
+    padding: 20px;
+    border-radius: 70%;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 30px;
     z-index: 1000;
   }
 </style>
