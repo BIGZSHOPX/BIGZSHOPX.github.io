@@ -509,8 +509,8 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: #2c3e50;
   color: white;
