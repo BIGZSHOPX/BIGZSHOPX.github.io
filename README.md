@@ -563,7 +563,7 @@
       <input type="password" id="admin-password" placeholder="Enter password">
       <button onclick="verifyAdmin()">Unlock</button>
       <p id="password-hint" style="color: #ff6b6b; display: none;">
-        Hint: Try "bigzshopx123"
+        Hint: Try "0000000000"
       </p>
     </div>
     
