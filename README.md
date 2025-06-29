@@ -1,627 +1,704 @@
+"use client"
 
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BIGZSHOPX - Customazible & Premade Outfits</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      scroll-behavior: smooth;
-    }
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Badge } from "@/components/ui/badge"
+import { ShoppingCart, User, Settings, Menu, Plus, Star, Heart, Trash2 } from "lucide-react"
+import Image from "next/image"
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: #fff;
-      line-height: 1.6;
-      min-height: 100vh;
-    }
+// Floating Logo Component
+function FloatingLogo({ size = 48, className = "" }: { size?: number; className?: string }) {
+  const [isHovered, setIsHovered] = useState(false)
 
-    header {
-      background-color: rgba(0, 0, 0, 0.9);
-      color: white;
-      padding: 1rem 0;
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-      backdrop-filter: blur(10px);
-    }
+  return (
+    <div
+      className={`perspective-1000 ${className}`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div
+        className={`
+          relative transition-all duration-300 ease-in-out
+          ${isHovered ? "transform rotate-y-15 rotate-x-5 scale-110" : "animate-bounce"}
+        `}
+        style={{ width: size, height: size }}
+      >
+        <div
+          className={`
+            relative bg-gradient-to-br from-white via-gray-100 to-gray-200 
+            rounded-xl flex items-center justify-center p-2
+            shadow-2xl border border-gray-200 transition-all duration-300
+          `}
+          style={{
+            width: size,
+            height: size,
+            boxShadow: isHovered
+              ? "0 20px 40px rgba(147, 51, 234, 0.4), 0 0 30px rgba(147, 51, 234, 0.3)"
+              : "0 10px 25px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.1)",
+          }}
+        >
+          <div
+            className="w-full h-full bg-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-xl"
+            style={{ fontSize: size * 0.3 }}
+          >
+            BZ
+          </div>
+          {isHovered && (
+            <>
+              <div className="absolute -top-2 -right-2 w-2 h-2 bg-purple-400 rounded-full animate-ping" />
+              <div className="absolute -bottom-2 -left-2 w-1.5 h-1.5 bg-blue-400 rounded-full animate-ping" />
+              <div className="absolute top-1/2 -right-3 w-1 h-1 bg-pink-400 rounded-full animate-ping" />
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
 
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1200px;
-      margin: auto;
-      padding: 0 1rem;
-    }
+// Navigation Component
+function Navigation() {
+  const [open, setOpen] = useState(false)
+  const navItems = [
+    { name: "Home", href: "/" },
+    { name: "Men's", href: "#mens" },
+    { name: "Women's", href: "#womens" },
+    { name: "Accessories", href: "#accessories" },
+    { name: "Custom", href: "#customize" },
+    { name: "About", href: "#about" },
+    { name: "Contact", href: "#contact" },
+  ]
 
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: #fff;
-      text-decoration: none;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 2rem;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s, transform 0.3s;
-    }
-
-    nav a:hover {
-      color: #667eea;
-      transform: translateY(-2px);
-    }
-
-    .section {
-      padding: 80px 20px;
-      max-width: 1200px;
-      margin: auto;
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      margin-bottom: 2rem;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .hero {
-      background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(102, 126, 234, 0.3));
-      color: white;
-      text-align: center;
-      padding: 120px 20px;
-      border-radius: 20px;
-      margin: 2rem auto;
-      max-width: 1200px;
-    }
-
-    .hero h2 {
-      font-size: 4rem;
-      margin-bottom: 1rem;
-      font-weight: 800;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-      animation: fadeInUp 1s ease-out;
-    }
-
-    .hero p {
-      font-size: 1.3rem;
-      max-width: 600px;
-      margin: auto;
-      opacity: 0.9;
-      animation: fadeInUp 1s ease-out 0.3s both;
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .btn {
-      display: inline-block;
-      margin-top: 30px;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: white;
-      padding: 15px 30px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: all 0.3s;
-      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-      animation: fadeInUp 1s ease-out 0.6s both;
-    }
-
-    .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
-    }
-
-    .grid {
-      display: grid;
-      gap: 2rem;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 2rem;
-      border-radius: 20px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-      transition: all 0.3s;
-      text-align: center;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-    }
-
-    .outfit-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-
-    .outfit-item {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      overflow: hidden;
-      transition: all 0.3s;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .outfit-item:hover {
-      transform: scale(1.05);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    }
-
-    .outfit-image {
-      width: 100%;
-      height: 300px;
-      background: linear-gradient(45deg, #667eea, #764ba2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1.2rem;
-      font-weight: 600;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .outfit-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s;
-    }
-
-    .outfit-image:hover img {
-      transform: scale(1.1);
-    }
-
-    .outfit-image::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="30" r="8" fill="white" opacity="0.3"/><rect x="40" y="40" width="20" height="25" fill="white" opacity="0.3"/><rect x="35" y="65" width="10" height="20" fill="white" opacity="0.3"/><rect x="55" y="65" width="10" height="20" fill="white" opacity="0.3"/></svg>') center/60px no-repeat;
-      z-index: 1;
-    }
-
-    .outfit-image img + .placeholder-text {
-      display: none;
-    }
-
-    .outfit-image .placeholder-text {
-      z-index: 2;
-      position: relative;
-    }
-
-    .outfit-info {
-      padding: 1rem;
-    }
-
-    .outfit-info h4 {
-      margin-bottom: 0.5rem;
-      font-size: 1.1rem;
-    }
-
-    .outfit-info p {
-      opacity: 0.8;
-      font-size: 0.9rem;
-    }
-
-    .price {
-      color: #667eea;
-      font-weight: 600;
-      font-size: 1.1rem;
-      margin-top: 0.5rem;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-
-    input, textarea {
-      padding: 1rem;
-      font-size: 1rem;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      background-color: rgba(255, 255, 255, 0.1);
-      color: #fff;
-      border-radius: 10px;
-      backdrop-filter: blur(10px);
-    }
-
-    input::placeholder, textarea::placeholder {
-      color: rgba(255, 255, 255, 0.7);
-    }
-
-    button {
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: white;
-      padding: 1rem;
-      border: none;
-      border-radius: 10px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-weight: 600;
-    }
-
-    button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-    }
-
-    footer {
-      background: rgba(0, 0, 0, 0.9);
-      color: #fff;
-      text-align: center;
-      padding: 3rem 1rem;
-      margin-top: 4rem;
-    }
-
-    .section h2 {
-      font-size: 2.5rem;
-      margin-bottom: 2rem;
-      text-align: center;
-      font-weight: 800;
-    }
-
-    .github-notice {
-      background: rgba(102, 126, 234, 0.2);
-      border: 1px solid rgba(102, 126, 234, 0.5);
-      padding: 1rem;
-      border-radius: 10px;
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-
-    @media (max-width: 768px) {
-      .hero h2 {
-        font-size: 2.5rem;
-      }
-      
-      nav ul {
-        gap: 1rem;
-      }
-      
-      .grid {
-        grid-template-columns: 1fr;
-      }
-      
-      nav {
-        flex-direction: column;
-        gap: 1rem;
-      }
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <nav>
-      <a href="#home" class="logo">BIGZSHOPX</a>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#mens">Men's</a></li>
-        <li><a href="#womens">Women's</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+  return (
+    <nav className="border-b border-gray-800">
+      <div className="container mx-auto px-4">
+        <div className="hidden md:flex items-center justify-center space-x-8 py-4">
+          {navItems.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              className="text-gray-300 hover:text-white transition-colors font-medium"
+            >
+              {item.name}
+            </a>
+          ))}
+        </div>
+        <div className="md:hidden py-4">
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="text-white">
+                <Menu className="h-6 w-6" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="bg-black border-gray-800">
+              <nav className="flex flex-col space-y-4 mt-8">
+                {navItems.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className="text-gray-300 hover:text-white transition-colors py-2 font-medium"
+                    onClick={() => setOpen(false)}
+                  >
+                    {item.name}
+                  </a>
+                ))}
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </div>
     </nav>
-  </header>
+  )
+}
 
-  <section id="home" class="hero">
-    <h2>BIGZSHOPX</h2>
-    <p>BIGZSHOPX offers trendy premade outfits and fully customizable clothing that makes you stand out from the crowd.</p>
-    <a href="#contact" class="btn">Order Now</a>
-  </section>
+// Admin Panel Component
+function AdminPanel() {
+  const [products, setProducts] = useState([
+    { id: 1, name: "Premium Hoodie", price: 89, stock: 15, category: "Men's" },
+    { id: 2, name: "Designer Jeans", price: 129, stock: 8, category: "Men's" },
+    { id: 3, name: "Elegant Dress", price: 159, stock: 12, category: "Women's" },
+  ])
 
-  <div class="github-notice">
-    <p><strong>📸 Ready to add your outfit pictures?</strong> Upload your images to your GitHub repository and update the file names in the code!</p>
-  </div>
+  const [newProduct, setNewProduct] = useState({
+    name: "",
+    price: "",
+    stock: "",
+    category: "Men's",
+  })
 
-  <section id="mens" class="section">
-    <h2>Men's Collection</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Streetwear</h3>
-        <p>Urban-inspired looks with hoodies, joggers, and fresh sneakers. Perfect for the streets and casual hangouts.</p>
-      </div>
-      <div class="card">
-        <h3>Smart Casual</h3>
-        <p>Versatile pieces that work for both work and play. Elevated basics that never go out of style.</p>
-      </div>
-      <div class="card">
-        <h3>Athletic</h3>
-        <p>Performance meets style with our activewear collection. Stay comfortable while looking fresh.</p>
-      </div>
-    </div>
-
-    <div class="outfit-gallery">
-      <div class="outfit-item">
-        <div class="outfit-image">
-          <img src="images/mens-outfit-1.jpg" alt="Men's Streetwear Set" onerror="this.style.display='none';">
-          <span class="placeholder-text">Men's Streetwear #1</span>
-        </div>
-        <div class="outfit-info">
-          <h4>Urban Classic</h4>
-          <p>Comfortable hoodie and joggers combo</p>
-          <div class="price">$89.99</div>
-        </div>
-      </div>
-      
-      <div class="outfit-item">
-        <div class="outfit-image">
-          <img src="images/mens-outfit-2.jpg" alt="Men's Casual Fit" onerror="this.style.display='none';">
-          <span class="placeholder-text">Men's Casual #2</span>
-        </div>
-        <div class="outfit-info">
-          <h4>Daily Essentials</h4>
-          <p>Perfect for everyday wear</p>
-          <div class="price">$69.99</div>
-        </div>
-      </div>
-      
-      <div class="outfit-item">
-        <div class="outfit-image">
-          <img src="images/mens-outfit-3.jpg" alt="Men's Premium Set" onerror="this.style.display='none';">
-          <span class="placeholder-text">Men's Premium #3</span>
-        </div>
-        <div class="outfit-info">
-          <h4>Luxury Collection</h4>
-          <p>High-end materials and design</p>
-          <div class="price">$129.99</div>
-        </div>
-      </div>
-      
-      <div class="outfit-item">
-        <div class="outfit-image">
-          <img src="images/mens-outfit-4.jpg" alt="Men's Sport Look" onerror="this.style.display='none';">
-          <span class="placeholder-text">Men's Athletic #4</span>
-        </div>
-        <div class="outfit-info">
-          <h4>Active Wear</h4>
-          <p>Performance meets style</p>
-          <div class="price">$79.99</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="womens" class="section">
-    <h2>Women's Collection</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Trendy Sets</h3>
-        <p>Fashion-forward outfits that keep you ahead of the trends. Perfect for making a statement wherever you go.</p>
-      </div>
-      <div class="card">
-        <h3>Elegant Wear</h3>
-        <p>Sophisticated and classy pieces for special occasions and professional settings that command attention.</p>
-      </div>
-      <div class="card">
-        <h3>Casual Chic</h3>
-        <p>Comfortable yet stylish everyday wear that transitions from day to night effortlessly.</p>
-      </div>
-    </div>
-
-    <div class="outfit-gallery">
-      <div class="outfit-item">
-        <div class="outfit-image">
-          <img src="images/womens-outfit-1.jpg" alt="Women's Trendy Set" onerror="this.style.display='none';">
-          <span class="placeholder-text">Women's Trendy #1</span>
-        </div>
-        <div class="outfit-info">
-          <h4>Fashion Forward</h4>
-          <p>Latest trends in one complete look</p>
-          <div class="price">$95.99</div>
-        </div>
-      </div>
-      
-      <div class="outfit-item">
-        <div class="outfit-image">
-          <img src="images/womens-outfit-2.jpg" alt="Women's Elegant Wear" onerror="this.style.display='none';">
-          <span class="placeholder-text">Women's Elegant #2</span>
-        </div>
-        <div class="outfit-info">
-          <h4>Sophisticated Style</h4>
-          <p>Perfect for professional settings</p>
-          <div class="price">$119.99</div>
-        </div>
-      </div>
-      
-      <div class="outfit-item">
-        <div class="outfit-image">
-          <img src="images/womens-outfit-3.jpg" alt="Women's Casual Chic" onerror="this.style.display='none';">
-          <span class="placeholder-text">Women's Casual #3</span>
-        </div>
-        <div class="outfit-info">
-          <h4>Everyday Elegance</h4>
-          <p>Comfortable meets stylish</p>
-          <div class="price">$99.99</div>
-        </div>
-      </div>
-      
-      <div class="outfit-item">
-        <div class="outfit-image">
-          <img src="images/womens-outfit-4.jpg" alt="Women's Summer Collection" onerror="this.style.display='none';">
-          <span class="placeholder-text">Women's Summer #4</span>
-        </div>
-        <div class="outfit-info">
-          <h4>Summer Collection</h4>
-          <p>Light and breezy for warm days</p>
-          <div class="price">$85.99</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="about" class="section">
-    <h2>About BIGZSHOPX</h2>
-    <p>Founded in 2025, BIGZSHOPX was built to bring creativity and identity to fashion. Whether you're after convenience with our premade collections or want something uniquely yours with our custom designs, we're here to deliver high-quality style at an affordable price. Our team of experienced designers works closely with customers to create outfits that truly represent their personality and lifestyle.</p>
-  </section>
-
-  <section id="contact" class="section">
-    <h2>Contact Us</h2>
-    <p>Have questions or ready to order? Reach out directly at <strong>stephanmarlyp@gmail.com</strong> or use the form below.</p>
-    <form action="mailto:stephanmarlyp@gmail.com" method="post" enctype="text/plain">
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
-      <textarea name="message" placeholder="Your Message (describe your outfit needs, preferred style, size, etc.)" rows="5" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 BIGZSHOPX. All rights reserved.</p>
-    <p>Contact: stephanmarlyp@gmail.com</p>
-  </footer>
-</body>
-</html><!-- Floating Admin Button -->
-<button id="admin-btn" style="
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: #2c3e50;
-  color: black;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-  z-index: 9999;
-">⚙️</button>
-
-<script>
-  document.getElementById("admin-btn").addEventListener("click", function() {
-    // Create admin panel if it doesn't exist
-    if (!document.getElementById("admin-panel")) {
-      const panel = document.createElement("div");
-      panel.id = "admin-panel";
-      panel.innerHTML = `
-        <div style="
-          position: fixed;
-          bottom: 80px;
-          right: 20px;
-          width: 300px;
-          background: white;
-          border-radius: 8px;
-          padding: 15px;
-          box-shadow: 0 0 20px rgba(0,0,0,0.2);
-          z-index: 9998;
-        ">
-          <!-- Paste the FULL admin panel code from earlier here -->
-        </div>
-      `;
-      document.body.appendChild(panel);
+  const addProduct = () => {
+    if (newProduct.name && newProduct.price && newProduct.stock) {
+      setProducts([
+        ...products,
+        {
+          id: Date.now(),
+          name: newProduct.name,
+          price: Number.parseInt(newProduct.price),
+          stock: Number.parseInt(newProduct.stock),
+          category: newProduct.category,
+        },
+      ])
+      setNewProduct({ name: "", price: "", stock: "", category: "Men's" })
     }
-    
-    // Toggle visibility
-    const panel = document.getElementById("admin-panel");
-    panel.style.display = panel.style.display === "block" ? "none" : "block";
-  });
-</script>
-<!-- Add this right before </body> in index.html -->
-<div id="admin-panel" style="display: none;">
-  <div class="admin-header" onclick="toggleAdmin()">
-    <span>🔒 BIGZSHOPX ADMIN</span>
-    <span id="admin-toggle-icon">▼</span>
-  </div>
-  
-  <div class="admin-content" id="admin-content">
-    <div id="login-form">
-      <h3>Admin Login</h3>
-      <input type="password" id="admin-password" placeholder="Enter password">
-      <button onclick="verifyAdmin()">Unlock</button>
-      <p id="password-hint" style="color: #ff6b6b; display: none;">
-        Hint: Try "0000000000"
-      </p>
-    </div>
-    
-    <div id="admin-tools" style="display: none;">
-      <!-- ... (keep existing admin tools content) ... -->
-    </div>
-  </div>
-</div>
+  }
 
-<script>
-  // Password Configuration
-  const ADMIN_PASSWORD = "zshop.x9y56";
-  let failedAttempts = 0;
+  const deleteProduct = (id: number) => {
+    setProducts(products.filter((p) => p.id !== id))
+  }
 
-  function verifyAdmin() {
-    const password = document.getElementById("admin-password").value;
-    const hintElement = document.getElementById("password-hint");
-    
-    if (password === ADMIN_PASSWORD) {
-      // Successful login
-      document.getElementById("login-form").style.display = "none";
-      document.getElementById("admin-tools").style.display = "block";
-      loadProducts();
-      failedAttempts = 0;
-      hintElement.style.display = "none";
-    } else {
-      // Failed attempt
-      failedAttempts++;
-      hintElement.style.display = "block";
-      
-      if (failedAttempts >= 2) {
-        hintElement.textContent = `Hint: The password is "${ADMIN_PASSWORD}"`;
+  return (
+    <div className="bg-gray-900 border-b border-gray-800">
+      <div className="container mx-auto px-4 py-8">
+        <h3 className="text-2xl font-bold text-white mb-6">Admin Panel - Stock Management</h3>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <Card className="bg-gray-800 border-gray-700">
+            <CardContent className="p-6">
+              <h4 className="text-lg font-semibold text-white mb-4">Add New Product</h4>
+              <div className="space-y-4">
+                <div>
+                  <Label htmlFor="name" className="text-gray-300">
+                    Product Name
+                  </Label>
+                  <Input
+                    id="name"
+                    value={newProduct.name}
+                    onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
+                    className="bg-gray-700 border-gray-600 text-white"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="price" className="text-gray-300">
+                    Price ($)
+                  </Label>
+                  <Input
+                    id="price"
+                    type="number"
+                    value={newProduct.price}
+                    onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
+                    className="bg-gray-700 border-gray-600 text-white"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="stock" className="text-gray-300">
+                    Stock Quantity
+                  </Label>
+                  <Input
+                    id="stock"
+                    type="number"
+                    value={newProduct.stock}
+                    onChange={(e) => setNewProduct({ ...newProduct, stock: e.target.value })}
+                    className="bg-gray-700 border-gray-600 text-white"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="category" className="text-gray-300">
+                    Category
+                  </Label>
+                  <Select
+                    value={newProduct.category}
+                    onValueChange={(value) => setNewProduct({ ...newProduct, category: value })}
+                  >
+                    <SelectTrigger className="bg-gray-700 border-gray-600 text-white">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent className="bg-gray-700 border-gray-600">
+                      <SelectItem value="Men's">Men's</SelectItem>
+                      <SelectItem value="Women's">Women's</SelectItem>
+                      <SelectItem value="Accessories">Accessories</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <Button onClick={addProduct} className="w-full bg-purple-600 hover:bg-purple-700">
+                  <Plus className="w-4 h-4 mr-2" />
+                  Add Product
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gray-800 border-gray-700">
+            <CardContent className="p-6">
+              <h4 className="text-lg font-semibold text-white mb-4">Current Inventory</h4>
+              <div className="space-y-3 max-h-96 overflow-y-auto">
+                {products.map((product) => (
+                  <div key={product.id} className="flex items-center justify-between p-3 bg-gray-700 rounded-lg">
+                    <div>
+                      <h5 className="font-medium text-white">{product.name}</h5>
+                      <p className="text-sm text-gray-300">
+                        ${product.price} • {product.category}
+                      </p>
+                      <Badge variant={product.stock > 10 ? "default" : product.stock > 5 ? "secondary" : "destructive"}>
+                        Stock: {product.stock}
+                      </Badge>
+                    </div>
+                    <Button variant="destructive" size="sm" onClick={() => deleteProduct(product.id)}>
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// Product Grid Component
+function ProductGrid() {
+  const [cart, setCart] = useState<{ id: number; name: string; price: number; quantity: number }[]>([])
+
+  const products = [
+    {
+      id: 1,
+      name: "Premium Black Hoodie",
+      price: 89,
+      image: "/placeholder.svg?height=300&width=300",
+      rating: 4.8,
+      reviews: 124,
+    },
+    {
+      id: 2,
+      name: "Designer Denim Jacket",
+      price: 129,
+      image: "/placeholder.svg?height=300&width=300",
+      rating: 4.9,
+      reviews: 89,
+    },
+    {
+      id: 3,
+      name: "Luxury Sneakers",
+      price: 199,
+      image: "/placeholder.svg?height=300&width=300",
+      rating: 4.7,
+      reviews: 156,
+    },
+    {
+      id: 4,
+      name: "Elegant Evening Dress",
+      price: 159,
+      image: "/placeholder.svg?height=300&width=300",
+      rating: 4.9,
+      reviews: 78,
+    },
+    {
+      id: 5,
+      name: "Casual Summer Shirt",
+      price: 49,
+      image: "/placeholder.svg?height=300&width=300",
+      rating: 4.6,
+      reviews: 203,
+    },
+    {
+      id: 6,
+      name: "Premium Leather Bag",
+      price: 249,
+      image: "/placeholder.svg?height=300&width=300",
+      rating: 4.8,
+      reviews: 92,
+    },
+    {
+      id: 7,
+      name: "Stylish Sunglasses",
+      price: 79,
+      image: "/placeholder.svg?height=300&width=300",
+      rating: 4.5,
+      reviews: 167,
+    },
+    {
+      id: 8,
+      name: "Cozy Winter Scarf",
+      price: 39,
+      image: "/placeholder.svg?height=300&width=300",
+      rating: 4.7,
+      reviews: 134,
+    },
+  ]
+
+  const addToCart = (product: (typeof products)[0]) => {
+    setCart((prev) => {
+      const existing = prev.find((item) => item.id === product.id)
+      if (existing) {
+        return prev.map((item) => (item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item))
       }
-      
-      // Shake animation for wrong password
-      document.getElementById("admin-password").style.animation = "shake 0.5s";
-      setTimeout(() => {
-        document.getElementById("admin-password").style.animation = "";
-      }, 500);
-    }
+      return [...prev, { id: product.id, name: product.name, price: product.price, quantity: 1 }]
+    })
   }
 
-  // Add this to your CSS
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      20%, 60% { transform: translateX(-5px); }
-      40%, 80% { transform: translateX(5px); }
-    }
-  `;
-  document.head.appendChild(style);
-</script>
-<style>
-  #admin-panel {
-    max-width: 90vw; /* Limits width on mobile */
-    left: 20px; /* Centers panel */
-    right: 20px;
-    margin: 0 auto;
+  return (
+    <div className="py-16">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold text-white mb-4">Featured Collections</h2>
+          <p className="text-gray-400 text-lg">Discover our latest premium clothing and accessories</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {products.map((product) => (
+            <Card
+              key={product.id}
+              className="bg-gray-900 border-gray-800 overflow-hidden group hover:border-purple-500 transition-all duration-300"
+            >
+              <div className="relative overflow-hidden">
+                <Image
+                  src={product.image || "/placeholder.svg"}
+                  alt={product.name}
+                  width={300}
+                  height={300}
+                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute top-4 right-4">
+                  <Button size="icon" variant="ghost" className="bg-black/50 hover:bg-black/70 text-white">
+                    <Heart className="w-4 h-4" />
+                  </Button>
+                </div>
+              </div>
+              <CardContent className="p-6">
+                <h3 className="font-semibold text-white mb-2">{product.name}</h3>
+                <div className="flex items-center mb-3">
+                  <div className="flex items-center">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`w-4 h-4 ${
+                          i < Math.floor(product.rating) ? "text-yellow-400 fill-current" : "text-gray-600"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <span className="text-sm text-gray-400 ml-2">({product.reviews})</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl font-bold text-purple-400">${product.price}</span>
+                  <Button onClick={() => addToCart(product)} className="bg-purple-600 hover:bg-purple-700 text-white">
+                    <ShoppingCart className="w-4 h-4 mr-2" />
+                    Add to Cart
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// Outfit Customizer Component
+function OutfitCustomizer() {
+  const [selectedItems, setSelectedItems] = useState({
+    top: null as any,
+    bottom: null as any,
+    shoes: null as any,
+    accessories: null as any,
+  })
+
+  const customizationOptions = {
+    top: [
+      { id: 1, name: "Classic T-Shirt", price: 29, color: "White" },
+      { id: 2, name: "Premium Hoodie", price: 79, color: "Black" },
+      { id: 3, name: "Designer Polo", price: 59, color: "Navy" },
+    ],
+    bottom: [
+      { id: 1, name: "Slim Jeans", price: 89, color: "Blue" },
+      { id: 2, name: "Cargo Pants", price: 99, color: "Khaki" },
+      { id: 3, name: "Chino Shorts", price: 49, color: "Beige" },
+    ],
+    shoes: [
+      { id: 1, name: "Sneakers", price: 129, color: "White" },
+      { id: 2, name: "Boots", price: 189, color: "Brown" },
+      { id: 3, name: "Loafers", price: 159, color: "Black" },
+    ],
+    accessories: [
+      { id: 1, name: "Watch", price: 199, color: "Silver" },
+      { id: 2, name: "Sunglasses", price: 89, color: "Black" },
+      { id: 3, name: "Belt", price: 59, color: "Leather" },
+    ],
   }
-</style>
+
+  const totalPrice = Object.values(selectedItems).reduce((sum, item) => sum + (item?.price || 0), 0)
+
+  return (
+    <div className="py-16 bg-gray-900">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold text-white mb-4">Custom Outfit Builder</h2>
+          <p className="text-gray-400 text-lg">Create your perfect look with our customization tools</p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="space-y-8">
+            {Object.entries(customizationOptions).map(([category, items]) => (
+              <Card key={category} className="bg-gray-800 border-gray-700">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold text-white mb-4 capitalize">{category}</h3>
+                  <div className="grid grid-cols-1 gap-3">
+                    {items.map((item) => (
+                      <div
+                        key={item.id}
+                        className={`p-4 rounded-lg border cursor-pointer transition-all ${
+                          selectedItems[category as keyof typeof selectedItems]?.id === item.id
+                            ? "border-purple-500 bg-purple-500/10"
+                            : "border-gray-600 hover:border-gray-500"
+                        }`}
+                        onClick={() => setSelectedItems((prev) => ({ ...prev, [category]: item }))}
+                      >
+                        <div className="flex justify-between items-center">
+                          <div>
+                            <h4 className="font-medium text-white">{item.name}</h4>
+                            <p className="text-sm text-gray-400">{item.color}</p>
+                          </div>
+                          <span className="text-purple-400 font-semibold">${item.price}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="lg:sticky lg:top-8">
+            <Card className="bg-gray-800 border-gray-700">
+              <CardContent className="p-6">
+                <h3 className="text-xl font-semibold text-white mb-6">Your Custom Outfit</h3>
+
+                <div className="space-y-4 mb-6">
+                  {Object.entries(selectedItems).map(([category, item]) => (
+                    <div key={category} className="flex justify-between items-center py-2 border-b border-gray-700">
+                      <span className="text-gray-300 capitalize">{category}:</span>
+                      <span className="text-white">{item ? `${item.name} - $${item.price}` : "Not selected"}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="border-t border-gray-700 pt-4 mb-6">
+                  <div className="flex justify-between items-center text-xl font-bold">
+                    <span className="text-white">Total:</span>
+                    <span className="text-purple-400">${totalPrice}</span>
+                  </div>
+                </div>
+
+                <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white" disabled={totalPrice === 0}>
+                  Add Custom Outfit to Cart
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// Main Homepage Component
+export default function HomePage() {
+  const [showAdmin, setShowAdmin] = useState(false)
+  const [showCustomizer, setShowCustomizer] = useState(false)
+
+  return (
+    <div className="min-h-screen bg-black text-white">
+      {/* Header */}
+      <header className="border-b border-gray-800">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <FloatingLogo size={48} />
+              <h1 className="text-2xl font-bold text-white">BIGZSHOPX</h1>
+            </div>
+
+            <div className="flex items-center space-x-4">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setShowAdmin(!showAdmin)}
+                className={`border-gray-700 text-white hover:bg-gray-800 transition-all ${
+                  showAdmin ? "bg-purple-600 border-purple-500" : ""
+                }`}
+              >
+                <Settings className="w-4 h-4 mr-2" />
+                Admin {showAdmin && "(Active)"}
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className="border-gray-700 text-white hover:bg-gray-800 bg-transparent"
+              >
+                <ShoppingCart className="w-4 h-4 mr-2" />
+                Cart (0)
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className="border-gray-700 text-white hover:bg-gray-800 bg-transparent"
+              >
+                <User className="w-4 h-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <Navigation />
+
+      {/* Admin Panel */}
+      {showAdmin && (
+        <div className="bg-gradient-to-r from-purple-900/20 to-blue-900/20 border-b border-purple-500/30">
+          <div className="container mx-auto px-4 py-2">
+            <div className="flex items-center justify-center space-x-2 text-purple-300">
+              <Settings className="w-4 h-4" />
+              <span className="text-sm font-medium">Admin Mode Active - Manage your inventory below</span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showAdmin && <AdminPanel />}
+
+      {/* Hero Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-4 text-center">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex justify-center mb-8">
+              <FloatingLogo size={120} />
+            </div>
+
+            <h2 className="text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
+              BIGZSHOPX
+            </h2>
+            <div className="w-24 h-0.5 bg-purple-500 mx-auto mb-8"></div>
+            <p className="text-xl text-gray-300 mb-8 leading-relaxed">
+              BIGZSHOPX offers trendy premade outfits and fully customizable clothing that makes you stand out from the
+              crowd.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                size="lg"
+                className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 text-lg font-semibold"
+                onClick={() => document.getElementById("products")?.scrollIntoView({ behavior: "smooth" })}
+              >
+                Shop Now
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white px-8 py-3 text-lg font-semibold bg-transparent"
+                onClick={() => setShowCustomizer(!showCustomizer)}
+              >
+                Customize Outfit
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Custom Outfit Builder */}
+      {showCustomizer && <OutfitCustomizer />}
+
+      {/* Product Sections */}
+      <div id="products">
+        <ProductGrid />
+      </div>
+
+      {/* Footer */}
+      <footer className="border-t border-gray-800 py-12">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+              <div className="flex items-center space-x-2 mb-4">
+                <FloatingLogo size={32} />
+                <span className="font-bold">BIGZSHOPX</span>
+              </div>
+              <p className="text-gray-400">Premium clothing for the modern individual.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Shop</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li>
+                  <a href="#" className="hover:text-white">
+                    Men's Collection
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white">
+                    Women's Collection
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white">
+                    Accessories
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white">
+                    Custom Outfits
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Support</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li>
+                  <a href="#" className="hover:text-white">
+                    Contact Us
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white">
+                    Size Guide
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white">
+                    Returns
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white">
+                    FAQ
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Connect</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li>
+                  <a href="#" className="hover:text-white">
+                    Instagram
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white">
+                    Twitter
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white">
+                    Facebook
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white">
+                    TikTok
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+            <p>&copy; 2025 BIGZSHOPX. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  )
+}
