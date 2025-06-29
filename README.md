@@ -643,15 +643,3 @@
             localStorage.setItem('bigzshopx-products', JSON.stringify(products));
         }
     </script>
-</body>
-</html>
-<a href="admin.html" style="
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: black;
-    color: white;
-    padding: 10px;
-    border-radius: 50%;
-    text-decoration: none;
-">🔧</a>
