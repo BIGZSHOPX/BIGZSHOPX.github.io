@@ -616,10 +616,7 @@
     }
   `;
   document.head.appendChild(style);
-</script>// Wrong:
-document.getElementById("admin-password").value;
-// Right:
-document.getElementById("admin-password").value; // (typo was in "admin-password")
+</script>
 <style>
   #admin-panel {
     max-width: 90vw; /* Limits width on mobile */
@@ -628,4 +625,3 @@ document.getElementById("admin-password").value; // (typo was in "admin-password
     margin: 0 auto;
   }
 </style>
-console.log("Current products:", JSON.parse(localStorage.getItem('bigzshopx-products')));
