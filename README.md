@@ -504,7 +504,52 @@
     <p>Contact: stephanmarlyp@gmail.com</p>
   </footer>
 </body>
-</html>
+</html><!-- Floating Admin Button -->
+<button id="admin-btn" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #2c3e50;
+  color: white;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  z-index: 9999;
+">⚙️</button>
+
+<script>
+  document.getElementById("admin-btn").addEventListener("click", function() {
+    // Create admin panel if it doesn't exist
+    if (!document.getElementById("admin-panel")) {
+      const panel = document.createElement("div");
+      panel.id = "admin-panel";
+      panel.innerHTML = `
+        <div style="
+          position: fixed;
+          bottom: 80px;
+          right: 20px;
+          width: 300px;
+          background: white;
+          border-radius: 8px;
+          padding: 15px;
+          box-shadow: 0 0 20px rgba(0,0,0,0.2);
+          z-index: 9998;
+        ">
+          <!-- Paste the FULL admin panel code from earlier here -->
+        </div>
+      `;
+      document.body.appendChild(panel);
+    }
+    
+    // Toggle visibility
+    const panel = document.getElementById("admin-panel");
+    panel.style.display = panel.style.display === "block" ? "none" : "block";
+  });
+</script>
 <!-- Add this right before </body> in index.html -->
 <div id="admin-panel" style="display: none;">
   <div class="admin-header" onclick="toggleAdmin()">
