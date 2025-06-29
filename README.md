@@ -616,8 +616,7 @@
     }
   `;
   document.head.appendChild(style);
-</script>
-// Wrong:
+</script>// Wrong:
 document.getElementById("admin-password").value;
 // Right:
 document.getElementById("admin-password").value; // (typo was in "admin-password")
