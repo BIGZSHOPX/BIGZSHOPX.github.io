@@ -517,39 +517,7 @@
     background: #000;
     color: white;
     padding: 20px;
-    border-radius: 70%;
+    border-radius: 20%;
     text-decoration: none;
     font-size: 30px;
     z-index: 1000;
-  }
-</style>
-// Inside your existing admin.js (or <script> tag)
-function saveProducts() {
-  localStorage.setItem('bigzshopx-products', JSON.stringify(products));
-}
-
-// Call this whenever you add/delete/edit products
-// Example:
-function addProduct() {
-  // ... (your existing code)
-  saveProducts(); // Add this line
-}// Add this to your main page's JS (scripts/main.js)
-function loadProducts() {
-  const products = JSON.parse(localStorage.getItem('bigzshopx-products')) || [];
-  
-  // Display products on your main page
-  products.forEach(product => {
-    // Append to your product grid:
-    document.getElementById("product-grid").innerHTML += `
-      <div class="product">
-        <img src="${product.image}">
-        <h3>${product.name}</h3>
-        <p>$${product.price}</p>
-        ${product.stock === "out-of-stock" ? '<span class="sold-out">Sold Out</span>' : ''}
-      </div>
-    `;
-  });
-}
-
-// Call on page load
-window.addEventListener('DOMContentLoaded', loadProducts);
