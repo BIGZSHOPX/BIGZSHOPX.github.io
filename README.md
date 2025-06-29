@@ -511,9 +511,9 @@
   right: 20px;
   width: 25px;
   height: 25px;
-  border-radius: 60%;
+  border-radius: 50%;
   background: #2c3e50;
-  color: white;
+  color: black;
   border: none;
   font-size: 20px;
   cursor: pointer;
