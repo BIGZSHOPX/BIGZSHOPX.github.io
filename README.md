@@ -509,7 +509,7 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 40px;
+  width: 80px;
   height: 50px;
   border-radius: 50%;
   background: #2c3e50;
