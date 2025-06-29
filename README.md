@@ -521,3 +521,137 @@
     text-decoration: none;
     font-size: 30px;
     z-index: 1000;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIGZSHOPX Admin</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #000;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+        input {
+            padding: 8px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <h1>🛠 BIGZSHOPX Admin Panel</h1>
+    
+    <!-- Password Protection -->
+    <div id="login">
+        <h3>Enter Admin Password</h3>
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="checkPassword()">Login</button>
+    </div>
+
+    <!-- Admin Content (Hidden Initially) -->
+    <div id="admin-content" style="display: none;">
+        <h2>📦 Product Management</h2>
+        <div id="product-list"></div>
+        
+        <h2>➕ Add New Product</h2>
+        <input type="text" id="product-name" placeholder="Product Name">
+        <input type="number" id="product-price" placeholder="Price">
+        <input type="text" id="product-image" placeholder="Image URL (e.g., images/summer.jpg)">
+        <button onclick="addProduct()">Add Product</button>
+    </div>
+
+    <script>
+        // Password Protection
+        function checkPassword() {
+            if (document.getElementById("password").value === "bigz123") {
+                document.getElementById("login").style.display = "none";
+                document.getElementById("admin-content").style.display = "block";
+                loadProducts();
+            } else {
+                alert("Wrong password! Try 'bigz123'");
+            }
+        }
+
+        // Product Management
+        let products = JSON.parse(localStorage.getItem('bigzshopx-products')) || [];
+        
+        function loadProducts() {
+            let html = '';
+            products.forEach((product, index) => {
+                html += `
+                    <div class="product-card">
+                        <h3>${product.name}</h3>
+                        <p>Price: $${product.price}</p>
+                        ${product.image ? `<img src="${product.image}" style="max-width: 200px;">` : ''}
+                        <button onclick="deleteProduct(${index})">Delete</button>
+                        <button onclick="editProduct(${index})">Edit Price</button>
+                    </div>
+                `;
+            });
+            document.getElementById("product-list").innerHTML = html;
+        }
+
+        function addProduct() {
+            products.push({
+                name: document.getElementById("product-name").value,
+                price: document.getElementById("product-price").value,
+                image: document.getElementById("product-image").value
+            });
+            saveProducts();
+            loadProducts();
+        }
+
+        function deleteProduct(index) {
+            if (confirm("Delete this product?")) {
+                products.splice(index, 1);
+                saveProducts();
+                loadProducts();
+            }
+        }
+
+        function editProduct(index) {
+            const newPrice = prompt("New price:", products[index].price);
+            if (newPrice) {
+                products[index].price = newPrice;
+                saveProducts();
+                loadProducts();
+            }
+        }
+
+        function saveProducts() {
+            localStorage.setItem('bigzshopx-products', JSON.stringify(products));
+        }
+    </script>
+</body>
+</html>
+<a href="admin.html" style="
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: black;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    text-decoration: none;
+">🔧</a>
