@@ -575,7 +575,7 @@
 
 <script>
   // Password Configuration
-  const ADMIN_PASSWORD = "bigzshopx123";
+  const ADMIN_PASSWORD = "zshop.x9y56";
   let failedAttempts = 0;
 
   function verifyAdmin() {
